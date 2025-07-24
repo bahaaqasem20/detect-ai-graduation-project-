@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:detectai_project/widgets/custom_form.dart';
-import 'package:detectai_project/widgets/custom_appbar.dart';
-import 'package:detectai_project/constants/app_colors.dart';
+import '../constants/app_colors.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -11,109 +9,160 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
   bool _obscurePassword = true;
-  @override
-  void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
-
-  void _togglePasswordVisibility() {
-    setState(() {
-      _obscurePassword = !_obscurePassword;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: const CustomAppBar(title: 'Sign In', showBackButton: false),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            SizedBox(
-              height: size.height * 0.25,
-              child: Image.asset('assets/images/logo.png', fit: BoxFit.contain),
-            ),
-            const SizedBox(height: 24),
-
-            CustomForm(
-              buttonText: 'Sign In',
-              fields: [
-                CustomFormField(
-                  label: 'Email',
-                  controller: emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your email';
-                    }
-                    if (!value.contains('@')) {
-                      return 'Invalid email format';
-                    }
-                    return null;
-                  },
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const SizedBox(height: 30),
+              Center(
+                child: Image.asset(
+                  'assets/images/logo.png',
+                  width: 120,
+                  height: 120,
                 ),
-                CustomFormField(
-                  label: 'Password',
-                  controller: passwordController,
-                  obscureText: _obscurePassword,
+              ),
+              const SizedBox(height: 24),
+              const Center(
+                child: Text(
+                  'Welcome to DetectAI!',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 8),
+              const Center(
+                child: Text(
+                  'Become an advanced investigator',
+                  style: TextStyle(fontSize: 18, color: AppColors.textLight),
+                ),
+              ),
+              const SizedBox(height: 32),
+              const Text('Email', style: TextStyle(color: AppColors.textLight)),
+              const SizedBox(height: 8),
+              TextField(
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: AppColors.textFormFeild,
+                  hintText: 'Enter your ID',
+                  hintStyle: TextStyle(color: AppColors.hintColor),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none,
+                  ),
+                ),
+                style: TextStyle(color: Colors.white),
+              ),
+              const SizedBox(height: 16),
+              const Text(
+                'Password',
+                style: TextStyle(color: AppColors.textLight),
+              ),
+              const SizedBox(height: 8),
+              TextField(
+                obscureText: _obscurePassword,
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: AppColors.textFormFeild,
+                  hintText: 'Enter your Password',
+                  hintStyle: TextStyle(color: AppColors.hintColor),
                   suffixIcon: IconButton(
                     icon: Icon(
                       _obscurePassword
                           ? Icons.visibility_off
                           : Icons.visibility,
-                      color: AppColors.textLight,
+                      color: Colors.white70,
                     ),
-                    onPressed: _togglePasswordVisibility,
+                    onPressed: () {
+                      setState(() {
+                        _obscurePassword = !_obscurePassword;
+                      });
+                    },
                   ),
-                  validator: (value) {
-                    if (value == null || value.length < 6) {
-                      return 'Password must be at least 6 characters';
-                    }
-                    return null;
-                  },
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide.none,
+                  ),
                 ),
-              ],
-              onSubmit: (values) {
-                debugPrint('Email: ${values['Email']}');
-                debugPrint('Password: ${values['Password']}');
-              },
-            ),
-
-            // const SizedBox(height: 8),
-            // Align(
-            //   alignment: Alignment.centerRight,
-            //   child: TextButton(
-            //     onPressed: () {
-            //       debugPrint('Forgot Password? pressed');
-            //     },
-            //     child: const Text(
-            //       'Forgot Password?',
-            //       style: TextStyle(fontSize: 13, color: Colors.blue),
-            //     ),
-            //   ),
-            // ),
-            // const SizedBox(height: 24),
-            // Center(
-            //   child: TextButton(
-            //     onPressed: () {
-            //       debugPrint('Contact support pressed');
-            //     },
-            //     child: const Text(
-            //       "Don't have an account? Contact support",
-            //       style: TextStyle(fontSize: 14, color: Colors.blue),
-            //     ),
-            //   ),
-            // ),
-          ],
+                style: TextStyle(color: Colors.white),
+              ),
+              const SizedBox(height: 38),
+              ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.button,
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                child: const Text(
+                  'Sign In',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: AppColors.textLight,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 12),
+              Align(
+                alignment: Alignment.centerRight,
+                child: TextButton(
+                  onPressed: () {},
+                  child: const Text(
+                    'Forget password?',
+                    style: TextStyle(color: AppColors.textLight),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              Row(
+                children: const [
+                  Expanded(child: Divider(color: Colors.white38, thickness: 1)),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8),
+                    child: Text('OR', style: TextStyle(color: Colors.white70)),
+                  ),
+                  Expanded(child: Divider(color: Colors.white38, thickness: 1)),
+                ],
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xffF4F4F4),
+                  foregroundColor: Colors.black,
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text(
+                      'Continue with Google',
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    const SizedBox(width: 8),
+                    Image.asset('assets/images/google.png', width: 20),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
