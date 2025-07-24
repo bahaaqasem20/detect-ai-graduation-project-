@@ -1,4 +1,5 @@
 import 'package:detectai_project/constants/app_colors.dart';
+import 'package:detectai_project/screens/home_page.dart';
 import 'package:detectai_project/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
           bodyMedium: TextStyle(color: AppColors.textLight),
         ),
       ),
-      home: SplashScreen(),
+      home: HomePage(),
     );
   }
 }
