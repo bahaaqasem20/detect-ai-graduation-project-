@@ -50,11 +50,12 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: AppColors.cards,
         type: BottomNavigationBarType.fixed,
         currentIndex: _currentIndex,
         iconSize: screenWidth * 0.07,
-        selectedItemColor: AppColors.button,
-        unselectedItemColor: AppColors.background,
+        selectedItemColor: AppColors.textLight,
+        unselectedItemColor: Colors.white38,
         selectedLabelStyle: TextStyle(
           fontSize: screenWidth * 0.045,
           fontWeight: FontWeight.bold,
@@ -82,7 +83,7 @@ class _HomePageState extends State<HomePage> {
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [AppColors.textLight, AppColors.textLight],
+            colors: [AppColors.background, AppColors.background],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -97,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                 Container(
                   padding: EdgeInsets.all(screenWidth * 0.04),
                   decoration: BoxDecoration(
-                    color: AppColors.button,
+                    color: AppColors.cards,
                     borderRadius: BorderRadius.circular(screenWidth * 0.05),
                   ),
                   child: Row(
@@ -189,11 +190,12 @@ class _HomePageState extends State<HomePage> {
                 TextField(
                   decoration: InputDecoration(
                     hintText: "Search",
+                    hintStyle: TextStyle(color: AppColors.hintColor),
                     prefixIcon: const Icon(
                       Icons.search,
-                      color: AppColors.button,
+                      color: AppColors.textLight,
                     ),
-                    fillColor: AppColors.fieldBackground,
+                    fillColor: AppColors.cards,
                     filled: true,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
@@ -215,7 +217,7 @@ class _HomePageState extends State<HomePage> {
                       style: TextStyle(
                         fontSize: screenWidth * 0.045,
                         fontWeight: FontWeight.bold,
-                        color: AppColors.background,
+                        color: AppColors.textLight,
                       ),
                     ),
                     TextButton.icon(
@@ -223,13 +225,13 @@ class _HomePageState extends State<HomePage> {
                       icon: Icon(
                         Icons.sort,
                         size: screenWidth * 0.05,
-                        color: AppColors.background,
+                        color: AppColors.textLight,
                       ),
                       label: Text(
                         "Sort",
                         style: TextStyle(
                           fontSize: screenWidth * 0.045,
-                          color: Colors.black,
+                          color: AppColors.textLight,
                         ),
                       ),
                     ),
@@ -253,7 +255,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           padding: EdgeInsets.all(screenWidth * 0.035),
                           decoration: BoxDecoration(
-                            color: AppColors.fieldBackground,
+                            color: AppColors.cards,
                             borderRadius: BorderRadius.circular(
                               screenWidth * 0.03,
                             ),
@@ -270,7 +272,7 @@ class _HomePageState extends State<HomePage> {
                                 child: Text(
                                   "${caseData['name']}, ${caseData['id']}",
                                   style: TextStyle(
-                                    color: AppColors.background,
+                                    color: AppColors.textLight,
                                     fontSize: screenWidth * 0.043,
                                   ),
                                 ),
