@@ -9,10 +9,6 @@ class CrfMain extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(title: const Text('Crime Report Form')),
-      // bottomNavigationBar: CustomBottomNavigationBar(
-      //   currentIndex: 1,
-      //   screenWidth: screenWidth,
-      // ),
       body: Center(child: Text('Crime Report Form')),
     );
   }

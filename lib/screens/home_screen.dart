@@ -49,49 +49,6 @@ class _HomeScreenState extends State<HomeScreen> {
     ];
 
     return Scaffold(
-      // bottomNavigationBar: CustomBottomNavigationBar(
-      //   currentIndex: 0, //
-      //   screenWidth: screenWidth,
-      //   onTap: (index) {
-      //     setState(() {
-      //       _currentIndex = index;
-      //     });
-      //   },
-      // ),
-
-      // BottomNavigationBar(
-      //   backgroundColor: AppColors.cards,
-      //   type: BottomNavigationBarType.fixed,
-      //   currentIndex: _currentIndex,
-      //   iconSize: screenWidth * 0.07,
-      //   selectedItemColor: AppColors.textLight,
-      //   unselectedItemColor: Colors.white38,
-      //   selectedLabelStyle: TextStyle(
-      //     fontSize: screenWidth * 0.045,
-      //     fontWeight: FontWeight.bold,
-      //   ),
-      //   unselectedLabelStyle: TextStyle(
-      //     fontSize: screenWidth * 0.04,
-      //     fontWeight: FontWeight.normal,
-      //   ),
-      //   onTap: (index) {
-      //     setState(() {
-      //       _currentIndex = index;
-      //     });
-      //   },
-      //   items: const [
-      //     BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-      //     BottomNavigationBarItem(icon: Icon(Icons.add), label: "Add Case"),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.notifications),
-      //       label: "Notification",
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.person),
-      //       label: "Account",
-      //     ),
-      //   ],
-      // ),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
