@@ -82,7 +82,7 @@ class _CustomFormState extends State<CustomForm> {
                           ),
                         ),
                       );
-                    }).toList(),
+                    }),
                     const SizedBox(height: 20),
                     SizedBox(
                       width: isMobile ? double.infinity : 200,

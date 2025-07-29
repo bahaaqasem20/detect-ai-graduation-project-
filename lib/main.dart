@@ -1,6 +1,6 @@
 import 'package:detectai_project/constants/app_colors.dart';
-import 'package:detectai_project/screens/home_page.dart';
-import 'package:detectai_project/screens/splash_screen.dart';
+import 'package:detectai_project/routes/app_routes.dart';
+import 'package:detectai_project/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -22,7 +22,9 @@ class MyApp extends StatelessWidget {
           bodyMedium: TextStyle(color: AppColors.textLight),
         ),
       ),
-      home: HomePage(),
+      // initialRoute: AppRoutes.home,
+      // routes: AppRoutes.routes,
+      home: MainScreen(),
     );
   }
 }
