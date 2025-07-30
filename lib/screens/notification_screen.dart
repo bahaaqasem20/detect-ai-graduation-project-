@@ -68,7 +68,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
     double height,
   ) {
     return Card(
-      color: AppColors.background,
+      color: AppColors.cards,
       margin: EdgeInsets.only(bottom: height * 0.004),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(width * 0.025),
