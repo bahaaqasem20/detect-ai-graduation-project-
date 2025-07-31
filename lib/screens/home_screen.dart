@@ -10,6 +10,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  // ignore: unused_field
   final int _currentIndex = 0;
 
   void _openCaseDetails(BuildContext context, String caseName) {
