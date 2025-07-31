@@ -15,7 +15,7 @@ class AppRoutes {
   static Map<String, WidgetBuilder> routes = {
     mainScreen: (context) => const MainScreen(),
     home: (context) => const HomeScreen(),
-    add: (context) => const CrfMain(),
+    add: (context) => CrfMain(),
     notifications: (context) => const NotificationScreen(),
     account: (context) => const AccountScreen(),
   };
