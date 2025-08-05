@@ -1,9 +1,11 @@
 import 'package:detectai_project/constants/app_colors.dart';
 import 'package:detectai_project/constants/input_field_type.dart';
-import 'package:detectai_project/screens/home_screen.dart';
+import 'package:detectai_project/screens/crime_report_form/crf_victim_info2.dart';
 import 'package:detectai_project/screens/main_screen.dart';
 import 'package:detectai_project/widgets/ReusableInputField.dart';
+import 'package:detectai_project/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 
 class CrfMain extends StatelessWidget {
   final caseNameController = TextEditingController();
@@ -34,11 +36,7 @@ class CrfMain extends StatelessWidget {
         elevation: 0,
         title: const Text(
           'Crime Report Form',
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: AppColors.textLight,
-          ),
+          style: TextStyle(color: AppColors.textLight),
         ),
       ),
       body: Padding(
@@ -46,6 +44,7 @@ class CrfMain extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              SizedBox(height: 20),
               Row(
                 children: [
                   ReusableInputField(
@@ -54,7 +53,7 @@ class CrfMain extends StatelessWidget {
                     controller: caseNameController,
                     isHalfWidth: true,
                   ),
-                  const SizedBox(width: 10),
+                  const SizedBox(width: 14),
                   ReusableInputField(
                     label: 'Case Number',
                     type: InputFieldType.number,
@@ -63,12 +62,14 @@ class CrfMain extends StatelessWidget {
                   ),
                 ],
               ),
+              SizedBox(height: 20),
               ReusableInputField(
                 label: 'How did you know about the crime?',
                 type: InputFieldType.dropdown,
                 controller: crimeSourceController,
                 dropdownItems: ['Mobile Call', 'Police Report', 'Witness'],
               ),
+              SizedBox(height: 20),
               Row(
                 children: [
                   ReusableInputField(
@@ -77,7 +78,7 @@ class CrfMain extends StatelessWidget {
                     controller: crimeDateController,
                     isHalfWidth: true,
                   ),
-                  const SizedBox(width: 10),
+                  const SizedBox(width: 14),
                   ReusableInputField(
                     label: 'Time',
                     type: InputFieldType.text,
@@ -86,17 +87,23 @@ class CrfMain extends StatelessWidget {
                   ),
                 ],
               ),
+              SizedBox(height: 20),
               ReusableInputField(
                 label: 'Location',
                 type: InputFieldType.location,
                 controller: crimeLocationController,
               ),
               const SizedBox(height: 20),
-              ElevatedButton(
+
+              CustomButton(
+                text: 'Next',
+                color: AppColors.button,
                 onPressed: () {
-                  // save or next
+                  // I use GetX
+                  Get.offAll(CrfVictimInfo());
                 },
-                child: const Text("Next"),
+
+                width: double.infinity,
               ),
             ],
           ),
