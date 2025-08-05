@@ -1,13 +1,18 @@
 import 'package:detectai_project/constants/app_colors.dart';
+import 'package:detectai_project/widgets/ai_option_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 
 class CaseBottomSheet extends StatelessWidget {
   final String caseName;
-  const CaseBottomSheet({super.key, required this.caseName});
+  final String caseId;
+  const CaseBottomSheet({
+    super.key,
+    required this.caseName,
+    required this.caseId,
+  });
 
   @override
   Widget build(BuildContext context) {
-    // نجيب عرض وارتفاع الشاشة
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
@@ -17,7 +22,7 @@ class CaseBottomSheet extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            caseName,
+            "$caseName, $caseId",
             style: TextStyle(
               fontSize: screenWidth * 0.05,
               fontWeight: FontWeight.bold,
@@ -27,7 +32,24 @@ class CaseBottomSheet extends StatelessWidget {
           ),
           SizedBox(height: screenHeight * 0.05),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pop(context);
+              showModalBottomSheet(
+                context: context,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+                ),
+                builder: (context) {
+                  return SizedBox(
+                    height: screenHeight * 0.5,
+                    child: AiOptionsBottomSheet(
+                      caseName: caseName,
+                      caseId: caseId,
+                    ),
+                  );
+                },
+              );
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.button,
               minimumSize: Size(double.infinity, screenHeight * 0.05),

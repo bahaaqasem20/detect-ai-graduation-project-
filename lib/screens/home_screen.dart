@@ -13,7 +13,7 @@ class _HomeScreenState extends State<HomeScreen> {
   // ignore: unused_field
   final int _currentIndex = 0;
 
-  void _openCaseDetails(BuildContext context, String caseName) {
+  void _openCaseDetails(BuildContext context, String caseName, String caseId) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
         return SizedBox(
           height: screenHeight * 0.40,
-          child: CaseBottomSheet(caseName: caseName),
+          child: CaseBottomSheet(caseName: caseName, caseId: caseId),
         );
       },
     );
@@ -218,7 +218,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       return GestureDetector(
                         onTap: () => _openCaseDetails(
                           context,
-                          "${caseData['name']}, ${caseData['id']}",
+                          "${caseData['name']}",
+                          " ${caseData['id']}",
                         ),
                         child: Container(
                           margin: EdgeInsets.symmetric(

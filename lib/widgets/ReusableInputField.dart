@@ -25,7 +25,7 @@ class ReusableInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = isHalfWidth
-        ? (MediaQuery.of(context).size.width / 2) - 30
+        ? (MediaQuery.of(context).size.width / 2) - 24
         : double.infinity;
 
     return SizedBox(
@@ -81,6 +81,7 @@ class ReusableInputField extends StatelessWidget {
           decoration: _inputDecoration(label),
         );
       case InputFieldType.text:
+      // ignore: unreachable_switch_default
       default:
         return TextFormField(
           controller: controller,
