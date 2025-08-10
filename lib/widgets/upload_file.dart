@@ -3,7 +3,15 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 class UploadFile extends StatefulWidget {
-  const UploadFile({super.key});
+  final String title;
+  final String description;
+  final List<String> allowedExtensions;
+  const UploadFile({
+    super.key,
+    required this.title,
+    required this.description,
+    required this.allowedExtensions,
+  });
 
   @override
   State<UploadFile> createState() => _UploadFileState();
@@ -15,7 +23,8 @@ class _UploadFileState extends State<UploadFile> {
   Future<void> pickFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
-      allowedExtensions: ['jpeg', 'pdf', 'mp4'],
+      allowedExtensions: widget.allowedExtensions,
+      //['jpeg', 'pdf', 'mp4'],
     );
 
     if (result != null) {
@@ -31,7 +40,8 @@ class _UploadFileState extends State<UploadFile> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Upload any files belonging to the victim',
+          widget.title,
+          //'Upload any files belonging to the victim',
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
@@ -40,7 +50,8 @@ class _UploadFileState extends State<UploadFile> {
         ),
         SizedBox(height: 4),
         Text(
-          'any files related to the victim, including photos, videos or files. (.jpeg .pdf .mp4)',
+          widget.description,
+          //'any files related to the victim, including photos, videos or files. (.jpeg .pdf .mp4)',
           style: TextStyle(fontSize: 12, color: AppColors.hintColor),
         ),
         const SizedBox(height: 12),

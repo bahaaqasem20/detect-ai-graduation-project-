@@ -1,45 +1,39 @@
 import 'package:detectai_project/constants/app_colors.dart';
-import 'package:detectai_project/screens/ues_ai/image_result.dart';
 import 'package:detectai_project/widgets/app_bar_use_ia.dart';
 import 'package:detectai_project/widgets/custom_button.dart';
-import 'package:detectai_project/widgets/upload_file.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 
-class ImageAnalysis extends StatefulWidget {
-  final String caseId;
-  const ImageAnalysis({super.key, required this.caseId});
+class TextResult extends StatelessWidget {
+  const TextResult({super.key});
 
-  @override
-  State<ImageAnalysis> createState() => _ImageAnalysisState();
-}
-
-class _ImageAnalysisState extends State<ImageAnalysis> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: AppBarUseIA(title: 'Image Analysis'),
+      appBar: AppBarUseIA(title: 'Text Analysis'),
       body: Padding(
         padding: EdgeInsets.all(screenWidth * 0.05),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            UploadFile(
-              title: "Upload Image",
-              description:
-                  "Upload any images related to this case, (.jpeg .png)",
-              allowedExtensions: ['jpeg', 'png'],
-            ),
             SizedBox(height: screenHeight * 0.02),
+            Text(
+              "Text Analysis Result",
+              style: TextStyle(
+                color: AppColors.textLight,
+                fontSize: screenWidth * 0.05,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             Spacer(),
             Padding(
               padding: EdgeInsets.only(bottom: screenHeight * 0.03),
               child: CustomButton(
-                text: "Result",
+                text: "Save",
                 onPressed: () {
-                  Get.to(() => ImageResult(), arguments: widget.caseId);
+                  Get.back();
                 },
                 width: screenWidth * 0.9,
                 color: AppColors.button,

@@ -1,5 +1,11 @@
+import 'package:detectai_project/screens/ues_ai/ai_scenario.dart';
+import 'package:detectai_project/screens/ues_ai/image_analysis.dart';
+import 'package:detectai_project/screens/ues_ai/sound_analysis.dart';
+import 'package:detectai_project/screens/ues_ai/text_analysis.dart';
+import 'package:detectai_project/screens/ues_ai/video_analysis.dart';
 import 'package:flutter/material.dart';
 import 'package:detectai_project/constants/app_colors.dart';
+import 'package:get/route_manager.dart';
 
 class AiOptionsBottomSheet extends StatelessWidget {
   const AiOptionsBottomSheet({
@@ -19,7 +25,6 @@ class AiOptionsBottomSheet extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          // Container(width: screenWidth * .04, height: screenHeight * .02, text),
           Text(
             "AI $caseName, $caseId",
             style: TextStyle(
@@ -30,7 +35,7 @@ class AiOptionsBottomSheet extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           SizedBox(height: screenHeight * 0.05),
-          _bulidAiButton(context, "Photo Analysis", 0),
+          _bulidAiButton(context, "Image Analysis", 0),
           _bulidAiButton(context, "Video Analysis", 1),
           _bulidAiButton(context, "Text Analysis", 2),
           _bulidAiButton(context, "Sound Analysis", 3),
@@ -48,11 +53,28 @@ class AiOptionsBottomSheet extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 12),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.background,
+          backgroundColor: AppColors.button,
           minimumSize: Size(double.infinity, screenHeight * 0.05),
         ),
         onPressed: () {
           Navigator.pop(context);
+          switch (indext) {
+            case 0:
+              Get.to(() => ImageAnalysis(caseId: caseId));
+              break;
+            case 1:
+              Get.to(() => VideoAnalysis(caseId: caseId));
+              break;
+            case 2:
+              Get.to(() => TextAnalysis(caseId: caseId));
+              break;
+            case 3:
+              Get.to(() => SoundAnalysis(caseId: caseId));
+              break;
+            case 4:
+              Get.to(() => AiScenario(caseId: caseId));
+              break;
+          }
         },
 
         child: Text(

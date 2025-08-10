@@ -94,7 +94,6 @@ class CrfMain extends StatelessWidget {
                 controller: crimeLocationController,
               ),
               const SizedBox(height: 20),
-
               CustomButton(
                 text: 'Next',
                 color: AppColors.button,

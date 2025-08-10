@@ -61,7 +61,12 @@ class CrfAditionalNotes extends StatelessWidget {
               ),
               SizedBox(height: 12),
               // Upload files
-              UploadFile(),
+              UploadFile(
+                title: 'Upload any files belonging to the victim',
+                description:
+                    'any files related to the victim, including photos, videos or files. (.jpeg .pdf .mp4)',
+                allowedExtensions: ['jpeg', 'pdf', 'mp4'],
+              ),
               SizedBox(height: 20),
               CustomButton(
                 text: 'Next',

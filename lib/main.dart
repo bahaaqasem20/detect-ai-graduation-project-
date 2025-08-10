@@ -22,8 +22,6 @@ class MyApp extends StatelessWidget {
           bodyMedium: TextStyle(color: AppColors.textLight),
         ),
       ),
-      // initialRoute: AppRoutes.home,
-      // routes: AppRoutes.routes,
       home: MainScreen(),
     );
   }
