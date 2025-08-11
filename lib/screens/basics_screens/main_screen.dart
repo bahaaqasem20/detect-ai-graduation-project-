@@ -1,8 +1,8 @@
 import 'package:detectai_project/constants/app_colors.dart';
-import 'package:detectai_project/screens/account_screen.dart';
+import 'package:detectai_project/screens/basics_screens/account_screen.dart';
 import 'package:detectai_project/screens/crime_report_form/crf_main.dart';
-import 'package:detectai_project/screens/home_screen.dart';
-import 'package:detectai_project/screens/notification_screen.dart';
+import 'package:detectai_project/screens/basics_screens/home_screen.dart';
+import 'package:detectai_project/screens/basics_screens/notification_screen.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {

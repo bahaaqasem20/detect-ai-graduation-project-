@@ -1,7 +1,7 @@
 import 'package:detectai_project/constants/app_colors.dart';
 import 'package:detectai_project/constants/input_field_type.dart';
 import 'package:detectai_project/screens/crime_report_form/crf_victim_info2.dart';
-import 'package:detectai_project/screens/main_screen.dart';
+import 'package:detectai_project/screens/basics_screens/main_screen.dart';
 import 'package:detectai_project/widgets/ReusableInputField.dart';
 import 'package:detectai_project/widgets/custom_button.dart';
 import 'package:flutter/material.dart';

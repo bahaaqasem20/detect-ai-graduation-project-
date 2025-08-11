@@ -1,5 +1,6 @@
 import 'package:detectai_project/constants/app_colors.dart';
 import 'package:detectai_project/constants/input_field_type.dart';
+import 'package:detectai_project/screens/crime_report_form/add_ey_ac5.dart';
 import 'package:detectai_project/widgets/ReusableInputField.dart';
 import 'package:detectai_project/widgets/custom_button.dart';
 import 'package:detectai_project/widgets/upload_file.dart';
@@ -73,7 +74,7 @@ class CrfAditionalNotes extends StatelessWidget {
                 color: AppColors.button,
                 onPressed: () {
                   // I use GetX
-                  Get.offAll("");
+                  Get.offAll(AddEyAc());
                 },
 
                 width: double.infinity,

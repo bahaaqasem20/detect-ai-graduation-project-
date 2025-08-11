@@ -1,5 +1,5 @@
 import 'package:detectai_project/constants/app_colors.dart';
-import 'package:detectai_project/screens/login_screen.dart';
+import 'package:detectai_project/screens/basics_screens/login_screen.dart';
 import 'package:detectai_project/widgets/onboarding_page.dart';
 import 'package:flutter/material.dart';
 

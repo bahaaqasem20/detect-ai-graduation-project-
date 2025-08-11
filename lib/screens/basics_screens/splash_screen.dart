@@ -1,4 +1,4 @@
-import 'package:detectai_project/screens/onboarding_screens.dart';
+import 'package:detectai_project/screens/basics_screens/onboarding_screens.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
