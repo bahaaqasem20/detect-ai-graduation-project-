@@ -1,8 +1,10 @@
 import 'package:detectai_project/constants/app_colors.dart';
 import 'package:detectai_project/constants/input_field_type.dart';
 import 'package:detectai_project/screens/crime_report_form/add_ey_ac5.dart';
+import 'package:detectai_project/screens/crime_report_form/crf_related_info3.dart';
 import 'package:detectai_project/widgets/ReusableInputField.dart';
 import 'package:detectai_project/widgets/custom_button.dart';
+import 'package:detectai_project/widgets/previous_button.dart';
 import 'package:detectai_project/widgets/upload_file.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
@@ -68,16 +70,27 @@ class CrfAditionalNotes extends StatelessWidget {
                     'any files related to the victim, including photos, videos or files. (.jpeg .pdf .mp4)',
                 allowedExtensions: ['jpeg', 'pdf', 'mp4'],
               ),
-              SizedBox(height: 20),
-              CustomButton(
-                text: 'Next',
-                color: AppColors.button,
-                onPressed: () {
-                  // I use GetX
-                  Get.offAll(AddEyAc());
-                },
-
-                width: double.infinity,
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  PreviousButton(
+                    text: "Previous",
+                    onPressed: () {
+                      // add with data
+                      Get.offAll(CrfRelatedInfo());
+                    },
+                  ),
+                  CustomButton(
+                    text: 'Next',
+                    color: AppColors.button,
+                    onPressed: () {
+                      // I use GetX
+                      Get.offAll(AddEyAc());
+                    },
+                    // width: double.infinity,
+                  ),
+                ],
               ),
             ],
           ),

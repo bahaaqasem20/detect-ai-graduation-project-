@@ -1,7 +1,6 @@
 import 'package:detectai_project/constants/app_colors.dart';
 import 'package:detectai_project/widgets/app_bar_use_ia.dart';
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
 
 class AiScenario extends StatelessWidget {
   final String caseId;

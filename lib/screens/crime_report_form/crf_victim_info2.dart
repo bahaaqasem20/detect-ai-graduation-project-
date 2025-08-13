@@ -1,8 +1,10 @@
 import 'package:detectai_project/constants/app_colors.dart';
 import 'package:detectai_project/constants/input_field_type.dart';
+import 'package:detectai_project/screens/crime_report_form/crf_main.dart';
 import 'package:detectai_project/screens/crime_report_form/crf_related_info3.dart';
 import 'package:detectai_project/widgets/ReusableInputField.dart';
 import 'package:detectai_project/widgets/custom_button.dart';
+import 'package:detectai_project/widgets/previous_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 
@@ -111,16 +113,27 @@ class CrfVictimInfo extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 20),
-              CustomButton(
-                text: 'Next',
-                color: AppColors.button,
-                onPressed: () {
-                  // I use GetX
-                  Get.offAll(CrfRelatedInfo());
-                },
-
-                width: double.infinity,
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  PreviousButton(
+                    text: "Previous",
+                    onPressed: () {
+                      // add with data
+                      Get.offAll(CrfMain());
+                    },
+                  ),
+                  CustomButton(
+                    text: 'Next',
+                    color: AppColors.button,
+                    onPressed: () {
+                      // I use GetX
+                      Get.offAll(CrfRelatedInfo());
+                    },
+                    // width: double.infinity,
+                  ),
+                ],
               ),
             ],
           ),
