@@ -1,10 +1,16 @@
-// AddEyAc
-
+import 'package:detectai_project/screens/basics_screens/home_screen.dart';
+import 'package:detectai_project/screens/basics_screens/main_screen.dart';
+import 'package:detectai_project/screens/crime_report_form/crf_aditional_notes4.dart';
+import 'package:detectai_project/widgets/add_accused_form.dart';
+import 'package:detectai_project/widgets/add_eyewitness_form.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../constants/app_colors.dart';
 
 class AddEyAc extends StatefulWidget {
+  const AddEyAc({super.key});
+
   @override
   _AddEyAcState createState() => _AddEyAcState();
 }
@@ -20,7 +26,7 @@ class _AddEyAcState extends State<AddEyAc> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF0B061C),
+      backgroundColor: AppColors.background,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: AppColors.background,
@@ -53,23 +59,7 @@ class _AddEyAcState extends State<AddEyAc> {
               ),
               if (showEyewitnessForm) ...[
                 const SizedBox(height: 18),
-                // Form of Eyewitnesses
-                // TextField(
-                //   controller: eyewitnessNameController,
-                //   decoration: InputDecoration(
-                //     labelText: "Eyewitness Name",
-                //     labelStyle: TextStyle(color: Colors.white70),
-                //     filled: true,
-                //     fillColor: Colors.white10,
-                //     border: OutlineInputBorder(),
-                //   ),
-                // ),
-                // const SizedBox(height: 10),
-                // ElevatedButton(
-                //   onPressed: () {
-                //   },
-                //   child: Text("Save Eyewitness"),
-                // ),
+                AddEyewitnessForm(),
                 const SizedBox(height: 20),
               ],
           
@@ -92,38 +82,26 @@ class _AddEyAcState extends State<AddEyAc> {
               ),
               if (showAccusedForm) ...[
                 const SizedBox(height: 18),
-                // Form of Accused
-                // TextField(
-                //   controller: accusedNameController,
-                //   decoration: InputDecoration(
-                //     labelText: "Accused Name",
-                //     labelStyle: TextStyle(color: Colors.white70),
-                //     filled: true,
-                //     fillColor: Colors.white10,
-                //     border: OutlineInputBorder(),
-                //   ),
-                // ),
-                // const SizedBox(height: 10),
-                // ElevatedButton(
-                //   onPressed: () {
-                //     // Add accused logic
-                //   },
-                //   child: Text("Save Accused"),
-                // ),
+                // AddAccusedForm(),
+                AddAccusedForm(),
               ],
-              Spacer(),
+              SizedBox(height: 30),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.off(CrfAditionalNotes());
+                    },
                     child: Text(
                       "previous",
                       style: TextStyle(color: AppColors.textLight, fontSize: 18),
                     ),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.to(MainScreen());
+                    },
                     child: Text(
                       "skip",
                       style: TextStyle(color: AppColors.textLight, fontSize: 18),
