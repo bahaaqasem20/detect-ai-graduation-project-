@@ -1,4 +1,3 @@
-import 'package:detectai_project/screens/basics_screens/home_screen.dart';
 import 'package:detectai_project/screens/basics_screens/main_screen.dart';
 import 'package:detectai_project/screens/crime_report_form/crf_aditional_notes4.dart';
 import 'package:detectai_project/widgets/add_accused_form.dart';

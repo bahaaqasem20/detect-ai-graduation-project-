@@ -1,3 +1,5 @@
+import 'package:detectai_project/auth/auth_service.dart';
+import 'package:detectai_project/screens/basics_screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import '../../constants/app_colors.dart';
 
@@ -9,6 +11,37 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  // get auth service
+  final authService = AuthService();
+
+  // text controllers
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  // login button pressed
+  void login() async {
+    // prepare data
+    final email = _emailController.text.trim();
+    final password = _passwordController.text.trim();
+
+    // attempt login
+    try {
+      await authService.signInWithEmailPassword(email, password);
+      // on success, navigate to main screen
+      // Navigator.pushReplacement(
+      //   context,
+      //   MaterialPageRoute(builder: (context) => HomeScreen()),
+      // );
+    } catch (e) {
+      if (mounted) {
+        // show error
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Login failed: $e')));
+      }
+    }
+  }
+
   bool _obscurePassword = true;
 
   @override
@@ -62,10 +95,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       const SizedBox(height: 8),
                       TextField(
+                        controller: _emailController,
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: AppColors.textFormFeild,
-                          hintText: 'Enter your ID',
+                          hintText: 'Enter your email',
                           hintStyle: TextStyle(color: AppColors.hintColor),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -81,6 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       const SizedBox(height: 8),
                       TextField(
+                        controller: _passwordController,
                         obscureText: _obscurePassword,
                         decoration: InputDecoration(
                           filled: true,
@@ -109,7 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       const SizedBox(height: 38),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: login,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.button,
                           padding: const EdgeInsets.symmetric(vertical: 16),

@@ -39,6 +39,7 @@ dependencies:
   intl: ^0.18.1
   get: ^4.7.2
   file_picker: ^10.2.1
+  supabase_flutter: ^2.10.2
 
 
 dev_dependencies:
