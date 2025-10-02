@@ -1,3 +1,4 @@
+import 'package:detectai_project/auth/auth_service.dart';
 import 'package:detectai_project/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -11,6 +12,14 @@ class AccountScreen extends StatefulWidget {
 }
 
 class _AccountScreenState extends State<AccountScreen> {
+  // get auth service
+  final authService = AuthService();
+
+  // logout function
+  void logout() async {
+    await authService.signOut();
+  }
+
   bool isEditing = false;
   late TextEditingController nameController;
   File? _profileImage;
@@ -33,6 +42,7 @@ class _AccountScreenState extends State<AccountScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final currentEmail = authService.getCurrentUser();
     final screenWidth = MediaQuery.of(context).size.width;
     final isTablet = screenWidth > 600;
 
@@ -108,12 +118,31 @@ class _AccountScreenState extends State<AccountScreen> {
                         Expanded(child: _statBox('On Progress Cases', '4')),
                       ],
                     ),
-                    const SizedBox(height: 16),
-                    _label('Phone number'),
-                    _infoBox('0592089037'),
+                    // const SizedBox(height: 16),
+                    // _label('Phone number'),
+                    // _infoBox('0592089037'),
                     const SizedBox(height: 16),
                     _label('Email'),
-                    _infoBox('qasembahaa2003@gmail.com'),
+                    _infoBox(currentEmail.toString()),
+                    const SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: logout,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.logOutButton,
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      child: const Text(
+                        'Log Out',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: AppColors.textLight,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),

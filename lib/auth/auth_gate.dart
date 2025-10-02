@@ -5,8 +5,8 @@ and redirects to the appropriate screen
 If authenticated, redirect to MainScreen
 If not authenticated, redirect to SignInScreen
 */
-import 'package:detectai_project/screens/basics_screens/home_screen.dart';
 import 'package:detectai_project/screens/basics_screens/login_screen.dart';
+import 'package:detectai_project/screens/basics_screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -24,7 +24,7 @@ class AuthGate extends StatelessWidget {
         }
         final session = snapshot.hasData ? snapshot.data!.session : null;
         if (session != null) {
-          return const HomeScreen();
+          return const MainScreen();
         } else {
           return const LoginScreen();
         }

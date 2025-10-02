@@ -16,12 +16,12 @@ class AuthService {
 
   // Not for now!
   // Sign up with email and password
-  // Future<AuthResponse> signUpWithEmailPassword(
-  //   String email,
-  //   String password,
-  // ) async {
-  //   return await _supabase.auth.signUp(email: email, password: password);
-  // }
+  Future<AuthResponse> signUpWithEmailPassword(
+    String email,
+    String password,
+  ) async {
+    return await _supabase.auth.signUp(email: email, password: password);
+  }
 
   // Sign out
   Future<void> signOut() async {

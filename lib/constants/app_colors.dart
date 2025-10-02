@@ -6,6 +6,7 @@ class AppColors {
   static const Color cards = Color(0xff090520);
 
   static const Color button = Color(0xff170F46);
+  static const Color logOutButton = Color(0xffFF3131);
   static const Color fieldBackground = Color(0xFFEEEEEE);
   static const Color unselctedItems = Color(0xFF08003E);
 

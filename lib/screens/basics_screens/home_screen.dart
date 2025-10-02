@@ -39,14 +39,14 @@ class _HomeScreenState extends State<HomeScreen> {
     List<Map<String, dynamic>> caseList = [
       {"name": "Stolen Laptop", "id": "16542440", "status": "solved"},
       {"name": "Missing Phone", "id": "16542441", "status": "in progress"},
-      {"name": "Fraud Report", "id": "16542442", "status": "solved"},
-      {"name": "Fraud Report", "id": "16542442", "status": "in progress"},
-      {"name": "Stolen Car", "id": "16542443", "status": "solved"},
-      {"name": "Missing Person", "id": "16542444", "status": "in progress"},
-      {"name": "Theft Case", "id": "16542445", "status": "solved"},
-      {"name": "Assault Case", "id": "16542446", "status": "in progress"},
-      {"name": "Vandalism Report", "id": "16542447", "status": "solved"},
-      {"name": "Burglary Case", "id": "16542448", "status": "in progress"},
+      // {"name": "Fraud Report", "id": "16542442", "status": "solved"},
+      // {"name": "Fraud Report", "id": "16542442", "status": "in progress"},
+      // {"name": "Stolen Car", "id": "16542443", "status": "solved"},
+      // {"name": "Missing Person", "id": "16542444", "status": "in progress"},
+      // {"name": "Theft Case", "id": "16542445", "status": "solved"},
+      // {"name": "Assault Case", "id": "16542446", "status": "in progress"},
+      // {"name": "Vandalism Report", "id": "16542447", "status": "solved"},
+      // {"name": "Burglary Case", "id": "16542448", "status": "in progress"},
     ];
 
     return Scaffold(
@@ -84,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Welcome Back, Bahaa",
+                              "Welcome, Detective!",
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: screenWidth * 0.045,
