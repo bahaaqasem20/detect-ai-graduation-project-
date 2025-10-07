@@ -1,3 +1,5 @@
+import 'package:detectai_project/auth/auth_service.dart';
+import 'package:detectai_project/screens/basics_screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import '../../constants/app_colors.dart';
 
@@ -9,6 +11,8 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  final authService = AuthService();
+
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
@@ -16,21 +20,50 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool _obscurePassword = true;
   bool _obscureConfirmPassword = true;
 
-  void signUp() {
+  Future<void> signUp() async {
     final email = _emailController.text.trim();
     final password = _passwordController.text.trim();
     final confirmPassword = _confirmPasswordController.text.trim();
 
-    if (password != confirmPassword) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text("Passwords do not match")));
+    //  Check empty fields
+    if (email.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Please fill in all fields")),
+      );
       return;
     }
 
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text("Signing up with $email")));
+    //  Check password match
+    if (password != confirmPassword) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("Passwords don't match!")));
+      return;
+    }
+
+    try {
+      print("Trying to sign up user: $email");
+
+      await authService.signUpWithEmailPassword(email, password);
+
+      if (!mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text("Account created successfully!")),
+      );
+
+      //  Navigate to MainScreen after signup
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const MainScreen()),
+      );
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Signup failed: ${e.toString()}")),
+        );
+      }
+    }
   }
 
   @override
@@ -209,7 +242,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                           TextButton(
                             onPressed: () {
-                              Navigator.pop(context); // يرجع لصفحة الـ Login
+                              Navigator.pop(context);
                             },
                             child: const Text(
                               "Sign In",
