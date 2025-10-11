@@ -1,14 +1,18 @@
 import 'package:detectai_project/constants/app_colors.dart';
 import 'package:detectai_project/constants/input_field_type.dart';
+import 'package:detectai_project/controllers/crime_report_controller.dart';
 import 'package:detectai_project/screens/crime_report_form/crf_main.dart';
 import 'package:detectai_project/screens/crime_report_form/crf_related_info3.dart';
 import 'package:detectai_project/widgets/ReusableInputField.dart';
 import 'package:detectai_project/widgets/custom_button.dart';
 import 'package:detectai_project/widgets/previous_button.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_instance/get_instance.dart';
 import 'package:get/route_manager.dart';
 
 class CrfVictimInfo extends StatelessWidget {
+  final controller = Get.find<CrimeReportController>();
+
   final victimFirstName = TextEditingController();
   final victimlastName = TextEditingController();
   final victimGender = TextEditingController();
@@ -128,8 +132,17 @@ class CrfVictimInfo extends StatelessWidget {
                     text: 'Next',
                     color: AppColors.button,
                     onPressed: () {
+                      // save data to controller
+                      controller.victimFirstName.value = victimFirstName.text;
+                      controller.victimLastName.value = victimlastName.text;
+                      controller.victimID.value = victimID.text;
+                      controller.victimGender.value = victimGender.text;
+                      controller.victimAge.value = victimAge.text;
+                      controller.victimAddress.value = victimAddress.text;
+                      controller.victimStatus.value = victimStatus.text;
+
                       // I use GetX
-                      Get.offAll(CrfRelatedInfo());
+                      Get.to(CrfRelatedInfo());
                     },
                     // width: double.infinity,
                   ),

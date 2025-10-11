@@ -1,3 +1,4 @@
+import 'package:detectai_project/controllers/crime_report_controller.dart';
 import 'package:detectai_project/screens/basics_screens/main_screen.dart';
 import 'package:detectai_project/screens/crime_report_form/crf_aditional_notes4.dart';
 import 'package:detectai_project/widgets/add_accused_form.dart';
@@ -15,12 +16,35 @@ class AddEyAc extends StatefulWidget {
 }
 
 class _AddEyAcState extends State<AddEyAc> {
+  final controller = Get.find<CrimeReportController>();
+
   bool showEyewitnessForm = false;
   bool showAccusedForm = false;
 
-  final TextEditingController eyewitnessNameController =
-      TextEditingController();
-  final TextEditingController accusedNameController = TextEditingController();
+  // Eyewitness Controllers
+  final witnessFirstNameController = TextEditingController();
+  final witnessLastNameController = TextEditingController();
+  final witnessGenderController = TextEditingController();
+  final witnessAgeController = TextEditingController();
+  final witnessIDController = TextEditingController();
+  final witnessStatusController = TextEditingController();
+  final witnessJobController = TextEditingController();
+  final witnessAddressController = TextEditingController();
+  final witnessVictimRelationshipController = TextEditingController();
+  final witnessAtCrimeSceneController = TextEditingController();
+  final witnessSayingsController = TextEditingController();
+
+  // Accused Controllers
+  final accusedFirstNameController = TextEditingController();
+  final accusedLastNameController = TextEditingController();
+  final accusedGenderController = TextEditingController();
+  final accusedAgeController = TextEditingController();
+  final accusedIDController = TextEditingController();
+  final accusedStatusController = TextEditingController();
+  final accusedJobController = TextEditingController();
+  final accusedAddressController = TextEditingController();
+  final accusedVictimRelationshipController = TextEditingController();
+  final accusedIndictmentListController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +71,7 @@ class _AddEyAcState extends State<AddEyAc> {
                     showEyewitnessForm = !showEyewitnessForm;
                   });
                 },
-                child: Text(
+                child: const Text(
                   "Add Eyewitnesses +",
                   style: TextStyle(
                     color: Colors.white,
@@ -58,19 +82,58 @@ class _AddEyAcState extends State<AddEyAc> {
               ),
               if (showEyewitnessForm) ...[
                 const SizedBox(height: 18),
-                AddEyewitnessForm(),
+                AddEyewitnessForm(
+                  witnessFirstName: witnessFirstNameController,
+                  witnessLastName: witnessLastNameController,
+                  witnessGender: witnessGenderController,
+                  witnessAge: witnessAgeController,
+                  witnessID: witnessIDController,
+                  witnessStatus: witnessStatusController,
+                  witnessJob: witnessJobController,
+                  witnessAddress: witnessAddressController,
+                  witnessVictimRelationship:
+                      witnessVictimRelationshipController,
+                  witnessAtCrimeScene: witnessAtCrimeSceneController,
+                  witnessSayings: witnessSayingsController,
+                ),
+                const SizedBox(height: 10),
+                ElevatedButton(
+                  onPressed: () {
+                    // Add Eyewitness name or other logic here
+                    final fullName =
+                        "${witnessFirstNameController.text} ${witnessLastNameController.text}";
+                    controller.addEyewitness(fullName as Map<String, String>);
+                    witnessFirstNameController.clear();
+                    witnessLastNameController.clear();
+                    setState(() {});
+                  },
+                  child: const Text("Add Eyewitness"),
+                ),
+                Obx(
+                  () => Column(
+                    children: controller.eyewitnesses
+                        .map(
+                          (e) => ListTile(
+                            title: Text(
+                              e as String,
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        )
+                        .toList(),
+                  ),
+                ),
                 const SizedBox(height: 20),
               ],
-          
+
               // Accused section
-              SizedBox(height: 22),
               GestureDetector(
                 onTap: () {
                   setState(() {
                     showAccusedForm = !showAccusedForm;
                   });
                 },
-                child: Text(
+                child: const Text(
                   "Add Accused +",
                   style: TextStyle(
                     color: Colors.white,
@@ -81,10 +144,48 @@ class _AddEyAcState extends State<AddEyAc> {
               ),
               if (showAccusedForm) ...[
                 const SizedBox(height: 18),
-                // AddAccusedForm(),
-                AddAccusedForm(),
+                AddAccusedForm(
+                  accusedFirstName: accusedFirstNameController,
+                  accusedLastName: accusedLastNameController,
+                  accusedGender: accusedGenderController,
+                  accusedAge: accusedAgeController,
+                  accusedID: accusedIDController,
+                  accusedStatus: accusedStatusController,
+                  accusedJob: accusedJobController,
+                  accusedAddress: accusedAddressController,
+                  accusedVictimRelationship:
+                      accusedVictimRelationshipController,
+                  accusedIndictmentList: accusedIndictmentListController,
+                ),
+                const SizedBox(height: 10),
+                ElevatedButton(
+                  onPressed: () {
+                    final fullName =
+                        "${accusedFirstNameController.text} ${accusedLastNameController.text}";
+                    controller.addAccused(fullName as Map<String, String>);
+                    accusedFirstNameController.clear();
+                    accusedLastNameController.clear();
+                    setState(() {});
+                  },
+                  child: const Text("Add Accused"),
+                ),
+                Obx(
+                  () => Column(
+                    children: controller.accused
+                        .map(
+                          (e) => ListTile(
+                            title: Text(
+                              e as String,
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        )
+                        .toList(),
+                  ),
+                ),
               ],
-              SizedBox(height: 30),
+
+              const SizedBox(height: 30),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -93,8 +194,11 @@ class _AddEyAcState extends State<AddEyAc> {
                       Get.off(CrfAditionalNotes());
                     },
                     child: Text(
-                      "previous",
-                      style: TextStyle(color: AppColors.textLight, fontSize: 18),
+                      "Previous",
+                      style: TextStyle(
+                        color: AppColors.textLight,
+                        fontSize: 18,
+                      ),
                     ),
                   ),
                   TextButton(
@@ -102,8 +206,11 @@ class _AddEyAcState extends State<AddEyAc> {
                       Get.to(MainScreen());
                     },
                     child: Text(
-                      "skip",
-                      style: TextStyle(color: AppColors.textLight, fontSize: 18),
+                      "Skip",
+                      style: TextStyle(
+                        color: AppColors.textLight,
+                        fontSize: 18,
+                      ),
                     ),
                   ),
                   ElevatedButton(
@@ -112,11 +219,14 @@ class _AddEyAcState extends State<AddEyAc> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      padding: EdgeInsets.symmetric(horizontal: 28, vertical: 14),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 28,
+                        vertical: 14,
+                      ),
                       elevation: 4,
                     ),
                     onPressed: () {
-                      //     Action
+                      Get.to(MainScreen());
                     },
                     child: Text(
                       "Next",

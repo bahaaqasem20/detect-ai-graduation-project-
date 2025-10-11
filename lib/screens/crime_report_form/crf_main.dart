@@ -1,13 +1,16 @@
 import 'package:detectai_project/constants/app_colors.dart';
 import 'package:detectai_project/constants/input_field_type.dart';
+import 'package:detectai_project/controllers/crime_report_controller.dart';
 import 'package:detectai_project/screens/crime_report_form/crf_victim_info2.dart';
 import 'package:detectai_project/screens/basics_screens/main_screen.dart';
 import 'package:detectai_project/widgets/ReusableInputField.dart';
 import 'package:detectai_project/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
 
 class CrfMain extends StatelessWidget {
+  final controller = Get.find<CrimeReportController>();
+
   final caseNameController = TextEditingController();
   final caseNumberController = TextEditingController();
   final crimeSourceController = TextEditingController();
@@ -98,8 +101,15 @@ class CrfMain extends StatelessWidget {
                 text: 'Next',
                 color: AppColors.button,
                 onPressed: () {
+                  // save data to controller
+                  controller.caseName.value = caseNameController.text;
+                  controller.caseNumber.value = caseNumberController.text;
+                  controller.crimeSource.value = crimeSourceController.text;
+                  controller.crimeDate.value = crimeDateController.text;
+                  controller.crimeTime.value = crimeTimeController.text;
+                  controller.crimeLocation.value = crimeLocationController.text;
                   // I use GetX
-                  Get.offAll(CrfVictimInfo());
+                  Get.to(CrfVictimInfo());
                 },
 
                 width: double.infinity,
