@@ -1,7 +1,8 @@
 import 'package:get/get.dart';
+import '../services/api_service.dart';
 
 class CrimeReportController extends GetxController {
-  // Crime basic info
+  // case data
   var caseName = ''.obs;
   var caseNumber = ''.obs;
   var crimeSource = ''.obs;
@@ -9,7 +10,7 @@ class CrimeReportController extends GetxController {
   var crimeTime = ''.obs;
   var crimeLocation = ''.obs;
 
-  // Victim info
+  // victim data
   var victimFirstName = ''.obs;
   var victimLastName = ''.obs;
   var victimGender = ''.obs;
@@ -18,64 +19,89 @@ class CrimeReportController extends GetxController {
   var victimStatus = ''.obs;
   var victimJob = ''.obs;
   var victimAddress = ''.obs;
-
-  // Related info
   var victimDoing = ''.obs;
   var expectedLocation = ''.obs;
   var victimValuables = ''.obs;
   var victimBelongings = ''.obs;
   var victimHealth = ''.obs;
-
-  // Additional notes
   var criminalRecord = ''.obs;
   var lastPerson = ''.obs;
   var victimBehavior = ''.obs;
 
-  // Eyewitnesses and Accused as list of maps
+  // 🔹 القوائم (الشهود والمتهمين)
   var eyewitnesses = <Map<String, String>>[].obs;
   var accused = <Map<String, String>>[].obs;
 
-  // Add an eyewitness (all fields as Map)
+  // add a new eyewitness
   void addEyewitness(Map<String, String> witness) {
     if (witness.isNotEmpty) {
       eyewitnesses.add(witness);
     }
   }
 
-  // Add an accused (all fields as Map)
+  // add a new accused
   void addAccused(Map<String, String> accusedPerson) {
     if (accusedPerson.isNotEmpty) {
       accused.add(accusedPerson);
     }
   }
 
-  // Upload data to backend
-  Map<String, dynamic> toJson() {
-    return {
+  // 🔹 رفع التقرير بالكامل
+  Future<void> submitReport() async {
+    print("🚀 Starting upload...");
+
+    // 1️⃣ إرسال بيانات القضية أولاً
+    final caseData = {
       "case_name": caseName.value,
       "case_number": caseNumber.value,
       "crime_source": crimeSource.value,
       "crime_date": crimeDate.value,
       "crime_time": crimeTime.value,
       "crime_location": crimeLocation.value,
-      "victim_first_name": victimFirstName.value,
-      "victim_last_name": victimLastName.value,
-      "victim_gender": victimGender.value,
-      "victim_age": victimAge.value,
-      "victim_id": victimID.value,
-      "victim_status": victimStatus.value,
-      "victim_job": victimJob.value,
-      "victim_address": victimAddress.value,
-      "victim_doing": victimDoing.value,
+    };
+
+    final caseId = await ApiService.createCase(caseData);
+    if (caseId == null) {
+      print('❌ Failed to create case. Stopping upload.');
+      return;
+    }
+
+    print('✅ Case created successfully with ID: $caseId');
+
+    // 2️⃣ إرسال بيانات الضحية
+    final victimData = {
+      "case_id": caseId,
+      "first_name": victimFirstName.value,
+      "last_name": victimLastName.value,
+      "gender": victimGender.value,
+      "age": victimAge.value,
+      "id_number": victimID.value,
+      "status": victimStatus.value,
+      "job": victimJob.value,
+      "address": victimAddress.value,
+      "doing": victimDoing.value,
       "expected_location": expectedLocation.value,
-      "victim_valuables": victimValuables.value,
-      "victim_belongings": victimBelongings.value,
-      "victim_health": victimHealth.value,
+      "valuables": victimValuables.value,
+      "belongings": victimBelongings.value,
+      "health": victimHealth.value,
       "criminal_record": criminalRecord.value,
       "last_person_seen": lastPerson.value,
-      "victim_behavior": victimBehavior.value,
-      "eyewitnesses": eyewitnesses.toList(),
-      "accused": accused.toList(),
+      "behavior": victimBehavior.value,
     };
+    await ApiService.createVictim(victimData);
+
+    // 3️⃣ إرسال الشهود
+    for (final witness in eyewitnesses) {
+      final witnessData = {...witness, "case_id": caseId.toString()};
+      await ApiService.createWitness(witnessData);
+    }
+
+    // 4️⃣ إرسال المتهمين
+    for (final acc in accused) {
+      final accusedData = {...acc, "case_id": caseId.toString()};
+      await ApiService.createAccused(accusedData);
+    }
+
+    print("✅ Full crime report uploaded successfully!");
   }
 }

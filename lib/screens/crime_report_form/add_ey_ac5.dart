@@ -99,12 +99,34 @@ class _AddEyAcState extends State<AddEyAc> {
                 const SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: () {
-                    // Add Eyewitness name or other logic here
-                    final fullName =
-                        "${witnessFirstNameController.text} ${witnessLastNameController.text}";
-                    controller.addEyewitness(fullName as Map<String, String>);
+                    controller.addEyewitness({
+                      "first_name": witnessFirstNameController.text,
+                      "last_name": witnessLastNameController.text,
+                      "gender": witnessGenderController.text,
+                      "age": witnessAgeController.text,
+                      "id_number": witnessIDController.text,
+                      "status": witnessStatusController.text,
+                      "job": witnessJobController.text,
+                      "address": witnessAddressController.text,
+                      "victim_relationship":
+                          witnessVictimRelationshipController.text,
+                      "at_crime_scene": witnessAtCrimeSceneController.text,
+                      "sayings": witnessSayingsController.text,
+                    });
+
+                    // Clear fields
                     witnessFirstNameController.clear();
                     witnessLastNameController.clear();
+                    witnessGenderController.clear();
+                    witnessAgeController.clear();
+                    witnessIDController.clear();
+                    witnessStatusController.clear();
+                    witnessJobController.clear();
+                    witnessAddressController.clear();
+                    witnessVictimRelationshipController.clear();
+                    witnessAtCrimeSceneController.clear();
+                    witnessSayingsController.clear();
+
                     setState(() {});
                   },
                   child: const Text("Add Eyewitness"),
@@ -115,7 +137,7 @@ class _AddEyAcState extends State<AddEyAc> {
                         .map(
                           (e) => ListTile(
                             title: Text(
-                              e as String,
+                              "${e['first_name']} ${e['last_name']}",
                               style: const TextStyle(color: Colors.white),
                             ),
                           ),
@@ -160,11 +182,32 @@ class _AddEyAcState extends State<AddEyAc> {
                 const SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: () {
-                    final fullName =
-                        "${accusedFirstNameController.text} ${accusedLastNameController.text}";
-                    controller.addAccused(fullName as Map<String, String>);
+                    controller.addAccused({
+                      "first_name": accusedFirstNameController.text,
+                      "last_name": accusedLastNameController.text,
+                      "gender": accusedGenderController.text,
+                      "age": accusedAgeController.text,
+                      "id_number": accusedIDController.text,
+                      "status": accusedStatusController.text,
+                      "job": accusedJobController.text,
+                      "address": accusedAddressController.text,
+                      "victim_relationship":
+                          accusedVictimRelationshipController.text,
+                      "indictment_list": accusedIndictmentListController.text,
+                    });
+
+                    // Clear fields
                     accusedFirstNameController.clear();
                     accusedLastNameController.clear();
+                    accusedGenderController.clear();
+                    accusedAgeController.clear();
+                    accusedIDController.clear();
+                    accusedStatusController.clear();
+                    accusedJobController.clear();
+                    accusedAddressController.clear();
+                    accusedVictimRelationshipController.clear();
+                    accusedIndictmentListController.clear();
+
                     setState(() {});
                   },
                   child: const Text("Add Accused"),
@@ -175,7 +218,7 @@ class _AddEyAcState extends State<AddEyAc> {
                         .map(
                           (e) => ListTile(
                             title: Text(
-                              e as String,
+                              "${e['first_name']} ${e['last_name']}",
                               style: const TextStyle(color: Colors.white),
                             ),
                           ),
@@ -193,7 +236,7 @@ class _AddEyAcState extends State<AddEyAc> {
                     onPressed: () {
                       Get.off(CrfAditionalNotes());
                     },
-                    child: Text(
+                    child: const Text(
                       "Previous",
                       style: TextStyle(
                         color: AppColors.textLight,
@@ -203,9 +246,9 @@ class _AddEyAcState extends State<AddEyAc> {
                   ),
                   TextButton(
                     onPressed: () {
-                      Get.to(MainScreen());
+                      Get.to(const MainScreen());
                     },
-                    child: Text(
+                    child: const Text(
                       "Skip",
                       style: TextStyle(
                         color: AppColors.textLight,
@@ -225,10 +268,11 @@ class _AddEyAcState extends State<AddEyAc> {
                       ),
                       elevation: 4,
                     ),
-                    onPressed: () {
-                      Get.to(MainScreen());
+                    onPressed: () async {
+                      await controller.submitReport();
+                      Get.to(const MainScreen());
                     },
-                    child: Text(
+                    child: const Text(
                       "Next",
                       style: TextStyle(
                         color: AppColors.textLight,
