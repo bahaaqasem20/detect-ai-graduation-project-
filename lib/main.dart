@@ -1,7 +1,8 @@
 import 'package:detectai_project/auth/auth_gate.dart';
 import 'package:detectai_project/constants/app_colors.dart';
+import 'package:detectai_project/controllers/crime_report_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
@@ -11,6 +12,7 @@ void main() async {
     anonKey:
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxibHhucGFlbWdqanJvZW5lZmh6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTkxNzcxNTcsImV4cCI6MjA3NDc1MzE1N30.xIzfBIKJAzDC41FuBhSQPGNxBWJv8vbzcsKPhG3tOvY',
   );
+  Get.put(CrimeReportController());
   runApp(const MyApp());
 }
 
